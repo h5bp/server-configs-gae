@@ -212,6 +212,12 @@ handlers:
   static_files: static/\1
   upload: static/(.*\.swf)
 
+- url: /(.*\.torrent)
+  mime_type: application/x-bittorrent
+  static_files: static/\1
+  upload: static/(.*\.torrent)
+  expiration: "30d"
+
 - url: /(.*\.txt)
   mime_type: text/plain
   static_files: static/\1
