@@ -1,14 +1,11 @@
 # Google App Engine - Python Application Configurations
 # https://developers.google.com/appengine/docs/python/config/appconfig
 
-# If you're looking for more than just the server configs and need
-# a functional complete application to use as the basis for your app,
-# checkout: https://github.com/coto/gae-boilerplate.
-
 application: your-app-name
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: true
 
 default_expiration: "30d"
 
