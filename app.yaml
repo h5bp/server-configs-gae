@@ -58,6 +58,15 @@ skip_files:
 - ^(.*/)?tests$
 
 
+# Lock the versions once you start using the template
+# https://cloud.google.com/appengine/docs/python/tools/libraries27
+libraries:
+- name: webapp2
+  version: latest
+- name: pycrypto
+  version: latest
+
+
 includes:
 - app_static_handlers.yaml
 
@@ -81,4 +90,4 @@ handlers:
 #   expiration: "15m"
 
 - url: /.*
-  script: gae.py
+  script: gae.application
