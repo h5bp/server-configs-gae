@@ -7,7 +7,43 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+
+# Avoiding vicious circle of new instances spin-ups caused by response slowdowns during warmups,
+# which cause more new instance spin-ups, which cause more response slowdowns during warmups...
+# Have at most 1 idle instance at all times, and tolerate 15 second response latencies before
+# spinning up a new instance.
+# Obviously, once cost becomes a secondary consideration (and Warmup is properly implemented),
+# remove / adjust these settings.
+# https://cloud.google.com/appengine/docs/python/modules/#config
+automatic_scaling:
+  max_idle_instances: 1
+  min_pending_latency: 15.0s
+
+
+# Warmup:
+# Enabling this causes GET requests to /_ah/warmup to precede live requests
+# when an instance is being spinned up.
+# Need to reimplement /_ah/warmup handler that warms up app state / caches
+#inbound_services:
+#- warmup
+
+
+builtins:
+
+# Enables Appstats at /_ah/stats/
+# Requires Event Recorder WSGI middleware (Implemented. See in gae.py)
+# https://cloud.google.com/appengine/docs/python/tools/appstats#Python_Install_the_event_recorder
+- appstats: on
+
+# Enables the deferred handler at /_ah/queue/deferred.
+# Allows use or deferred.defer() to simplify the creation of Task Queue tasks.
+# https://cloud.google.com/appengine/articles/deferred
+- deferred: on
+
+
+# This applies to static content only
 default_expiration: "30d"
+
 
 skip_files:
 - ^(.*/)?app\.yaml
@@ -21,12 +57,10 @@ skip_files:
 - ^(.*/)?\..*
 - ^(.*/)?tests$
 
-# (!) The expires headers are set pretty far in the future. If you don't control
-# versioning with filename-based cache busting, consider lowering the cache time
-# for resources like CSS and JS to something like 1 week.
 
 includes:
 - app_static_handlers.yaml
+
 
 # Entry Point
 handlers:
