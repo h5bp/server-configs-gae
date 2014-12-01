@@ -5,3 +5,6 @@ handlers:
 - url: /api/.*
   script: api.main.application
 
+- url: /_ah/warmup.*
+  script: api.main.application
+

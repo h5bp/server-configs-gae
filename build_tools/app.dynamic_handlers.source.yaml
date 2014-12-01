@@ -19,3 +19,6 @@ handlers:
 
 - path_prefix: /api/
   script: api.main.application
+
+- path_prefix: /_ah/warmup
+  script: api.main.application

@@ -24,8 +24,8 @@ automatic_scaling:
 # Enabling this causes GET requests to /_ah/warmup to precede live requests
 # when an instance is being spinned up.
 # Need to reimplement /_ah/warmup handler that warms up app state / caches
-#inbound_services:
-#- warmup
+inbound_services:
+- warmup
 
 
 builtins:
