@@ -1,0 +1,173 @@
+# This is a source of data for a script that assembles the actual
+# app_static_handlers.yaml file that is imported in app.yaml
+
+# The static hander file works as a sifter - only allows
+# specific, explicitly listed extensions to be treated as static files.
+
+# Only the files with extensions mentioned below will be exposed
+# as static content. If a file's extension is not here, it will not
+# be uploaded or served as static content.
+
+# The schema is "inspired" by one defined in `handlers` section of
+# https://developers.google.com/appengine/docs/python/config/appconfig
+# with the following additional notes:
+
+# - Here we only concentrate on `extensions` and, hence,
+#    `extensions` here replaces `url`, 'upload' and 'static_files' key-value pairs
+#    that you would normally see in 'handlers" section in regular app.yaml file.
+#    The value of the `extensions` key is one that would work if it were inserted
+#    into the following regular expression:
+#       '(?:^/(.+\.(' + value of extension key + ')))'
+#    and can be a single extension or a "|"-separated list of them.
+# - If you need advanced routing regex magic, alter the .mustache templates directly.
+
+handlers:
+
+# Sections sorted loosely in the reverse order of expiration length
+
+# Multimedia
+
+# audio and video
+
+- extension: m4a|f4a|f4b
+  mime_type: audio/mp4
+
+- extension: oga|ogg
+  mime_type: audio/ogg
+
+- extension: flv
+  mime_type: video/x-flv
+
+- extension: mp4|m4v|f4v|f4p
+  mime_type: video/mp4
+
+- extension: ogv
+  mime_type: video/ogg
+
+- extension: webm
+  mime_type: video/webm
+
+- extension: mid|midi|mp3|wav
+
+# images
+
+- extension: bmp|gif|jpeg|jpg|png
+
+- extension: webp
+  mime_type: image/webp
+
+- extension: svg|svgz
+  mime_type: images/svg+xml
+
+
+# Web Fonts
+
+- extension: eot
+  mime_type: application/vnd.ms-fontobject
+
+- extension: otf
+  mime_type: font/opentype
+
+# svg is in images section
+
+- extension: ttf|ttc
+  mime_type: application/x-font-ttf
+
+- extension: woff
+  mime_type: application/font-woff
+
+
+# Components / Extensions
+
+- extension: crx
+  mime_type: application/x-chrome-extension
+
+- extension: htc
+  mime_type: text/x-component
+
+- extension: oex
+  mime_type: application/x-opera-extension
+
+- extension: safariextz
+  mime_type: application/octet-stream
+
+- extension: swf
+  mime_type: application/x-shockwave-flash
+
+- extension: torrent
+  mime_type: application/x-bittorrent
+
+- extension: vcf
+  mime_type: text/x-vcard
+
+- extension: vtt
+  mime_type: text/vtt
+
+- extension: xpi
+  mime_type: application/x-xpinstall
+
+
+# Binary/String Blobs
+
+# windows / office files
+- extension: docx?|exe|pptx?|rtf|xlsx?
+
+# ODF files
+- extension: odp|ods|odt
+
+# compressed files
+- extension: bz2|gz|rar|tar|tgz|zip
+
+- extension: txt|csv
+  mime_type: text/plain
+
+
+
+# Potentially semi-dynamic content:
+
+- extension: ico
+  mime_type: image/x-icon
+  expiration: "7d"
+
+- extension: css
+  mime_type: text/css
+  expiration: "15m"
+
+- extension: html
+  mime_type: text/html
+  expiration: "15m"
+  http_headers:
+    # Better website experience for IE users
+    X-UA-Compatible: "IE=edge"
+    # Content Security Policy (CSP
+    #Content-Security-Policy: "script-src 'self'; object-src 'self'"
+
+- extension: js
+  mime_type: application/javascript
+  expiration: "15m"
+
+
+# Manifest / other application-related meta files
+
+- extension: appcache|manifest
+  mime_type: text/cache-manifest
+  expiration: "0s"
+
+- extension: webapp
+  mime_type: application/x-web-app-manifest+json
+  expiration: "0s"
+
+
+# Data interchange
+
+- extension: json
+  mime_type: application/json
+  expiration: "0s"
+
+- extension: xml
+  mime_type: application/xml
+  expiration: "0s"
+
+- extension: atom|rss
+  mime_type: application/xml
+  expiration: "15m"

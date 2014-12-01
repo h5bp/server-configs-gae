@@ -1,0 +1,24 @@
+# This is a source of data for a script that assembles the actual
+# app_dynamic_handlers.yaml file that is imported in app.yaml
+
+# Here we list the dynamic edges we are exposing as wsgi applications
+
+# We need to know the dynamic edges in order to prefix all static handlers
+# with exclusionary prefix for the dynamic edges.
+
+# The schema is "inspired" by one defined in `handlers` section of
+# https://developers.google.com/appengine/docs/python/config/appconfig
+# with the following additional notes:
+
+# Instead of `url` node `path_prefix` is used and is considered to be the
+# "folder" name/path that is the URI prefix for the dynamic app.
+# The `url` entry is formed automatically by using this rule:
+# '/' + path_prefix.strip('/') + '/.*'
+
+handlers:
+
+- path_prefix: /api/
+  script: api.main.application
+
+- path_prefix: /_ah/warmup
+  script: api.main.application

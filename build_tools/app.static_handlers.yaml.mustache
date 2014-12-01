@@ -1,0 +1,49 @@
+#{{warning}}{{! This is a template }}
+
+# All folders everywhere are considered static unless defined as dynamic
+# Thus, files from everywhere could can be "static", but they must be explicitly
+# listed file extensions. Files for extensions not listed here, will not be served.
+
+# Thus you are free to put "static" content anywhere you want, including the root
+# folder, but don't forget to add extensions to the static handlers source file
+# and regenerate the yaml file that is actually included into app.yaml
+
+# The extensions are inserted into a url regex pattern that will look like this:
+# (?:^/   insures that nothing is captured if some part fails and consumes leading slash
+#   (?!api/)   insures that path does not start with one of dynamic folders
+#   (?!admin/)   --- || --- (we allow multiple top-level dynamic folder to be excluded
+#   (.+\.(html|htm))   the extension(s)
+# )
+
+# FYI: default static content expiration is set in app.yaml and is usually days long
+
+handlers:
+
+{{#extensions}}
+- url: (?:^/{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+\.({{{extension}}})))
+  static_files: \1
+  upload: (?:^{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+\.({{{extension}}}))){{#has_expiration}}
+  expiration: "{{{expiration}}}"{{/has_expiration}}{{#has_http_headers}}
+  http_headers:{{#http_headers}}
+    {{key}}: "{{{value}}}"
+  {{/http_headers}}{{/has_http_headers}}
+
+{{/extensions}}
+
+# converting /.+/ requests into /.+/index.html
+- url: (?:^/{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+)/)
+  static_files: \1/index.html
+  upload: (?:^{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+/index\.html)){{#has_html_expiration}}
+  expiration: "{{{html_expiration}}}"{{/has_html_expiration}}{{#has_html_http_headers}}
+  http_headers:{{#html_http_headers}}
+    {{key}}: "{{{value}}}"
+  {{/html_http_headers}}{{/has_html_http_headers}}
+
+# the rule above did not pick up / to /index.html conversion, so
+- url: /
+  static_files: index.html
+  upload: index\.html{{#has_html_expiration}}
+  expiration: "{{{html_expiration}}}"{{/has_html_expiration}}{{#has_html_http_headers}}
+  http_headers:{{#html_http_headers}}
+    {{key}}: "{{{value}}}"
+  {{/html_http_headers}}{{/has_html_http_headers}}

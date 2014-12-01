@@ -1,0 +1,3 @@
+# this requirements file is for this folder's code only
+pystache
+pyyaml
