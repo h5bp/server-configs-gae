@@ -22,7 +22,7 @@ handlers:
 {{#extensions}}
 - url: (?:^/{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+\.({{{extension}}})))
   static_files: \1
-  upload: (?:^{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+\.({{{extension}}})){{#has_expiration}}
+  upload: (?:^{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+\.({{{extension}}}))){{#has_expiration}}
   expiration: "{{{expiration}}}"{{/has_expiration}}{{#has_http_headers}}
   http_headers:{{#http_headers}}
     {{key}}: "{{{value}}}"
@@ -33,7 +33,7 @@ handlers:
 # converting /.+/ requests into /.+/index.html
 - url: (?:^/{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+)/)
   static_files: \1/index.html
-  upload: (?:^{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+/index\.html){{#has_html_expiration}}
+  upload: (?:^{{#dynamic_prefixes}}(?!{{{.}}}){{/dynamic_prefixes}}(.+/index\.html)){{#has_html_expiration}}
   expiration: "{{{html_expiration}}}"{{/has_html_expiration}}{{#has_html_http_headers}}
   http_headers:{{#html_http_headers}}
     {{key}}: "{{{value}}}"
