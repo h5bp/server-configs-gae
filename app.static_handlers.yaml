@@ -21,16 +21,16 @@ handlers:
 
 - url: (?:^/(?!api/)(.+\.(m4a|f4a|f4b|oga|ogg|flv|mp4|m4v|f4v|f4p|ogv|webm|mid|midi|mp3|wav|bmp|gif|jpeg|jpg|png|webp|svg|svgz|eot|otf|ttf|ttc|woff|crx|htc|oex|safariextz|swf|torrent|vcf|vtt|xpi|docx?|exe|pptx?|rtf|xlsx?|odp|ods|odt|bz2|gz|rar|tar|tgz|zip|txt|csv)))
   static_files: \1
-  upload: (?:^(?!api/)(.+\.(m4a|f4a|f4b|oga|ogg|flv|mp4|m4v|f4v|f4p|ogv|webm|mid|midi|mp3|wav|bmp|gif|jpeg|jpg|png|webp|svg|svgz|eot|otf|ttf|ttc|woff|crx|htc|oex|safariextz|swf|torrent|vcf|vtt|xpi|docx?|exe|pptx?|rtf|xlsx?|odp|ods|odt|bz2|gz|rar|tar|tgz|zip|txt|csv))
+  upload: (?:^(?!api/)(.+\.(m4a|f4a|f4b|oga|ogg|flv|mp4|m4v|f4v|f4p|ogv|webm|mid|midi|mp3|wav|bmp|gif|jpeg|jpg|png|webp|svg|svgz|eot|otf|ttf|ttc|woff|crx|htc|oex|safariextz|swf|torrent|vcf|vtt|xpi|docx?|exe|pptx?|rtf|xlsx?|odp|ods|odt|bz2|gz|rar|tar|tgz|zip|txt|csv)))
 
 - url: (?:^/(?!api/)(.+\.(appcache|manifest|webapp|json|xml)))
   static_files: \1
-  upload: (?:^(?!api/)(.+\.(appcache|manifest|webapp|json|xml))
+  upload: (?:^(?!api/)(.+\.(appcache|manifest|webapp|json|xml)))
   expiration: "0s"
 
 - url: (?:^/(?!api/)(.+\.(html)))
   static_files: \1
-  upload: (?:^(?!api/)(.+\.(html))
+  upload: (?:^(?!api/)(.+\.(html)))
   expiration: "15m"
   http_headers:
     X-UA-Compatible: "IE=edge"
@@ -38,19 +38,19 @@ handlers:
 
 - url: (?:^/(?!api/)(.+\.(css|js|atom|rss)))
   static_files: \1
-  upload: (?:^(?!api/)(.+\.(css|js|atom|rss))
+  upload: (?:^(?!api/)(.+\.(css|js|atom|rss)))
   expiration: "15m"
 
 - url: (?:^/(?!api/)(.+\.(ico)))
   static_files: \1
-  upload: (?:^(?!api/)(.+\.(ico))
+  upload: (?:^(?!api/)(.+\.(ico)))
   expiration: "7d"
 
 
 # converting /.+/ requests into /.+/index.html
 - url: (?:^/(?!api/)(.+)/)
   static_files: \1/index.html
-  upload: (?:^(?!api/)(.+/index\.html)
+  upload: (?:^(?!api/)(.+/index\.html))
   expiration: "15m"
   http_headers:
     X-UA-Compatible: "IE=edge"
