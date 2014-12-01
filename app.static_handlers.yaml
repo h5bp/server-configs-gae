@@ -1,0 +1,66 @@
+#!!!! AUTO-GENERATED FILE !!!!
+
+# All folders everywhere are considered static unless defined as dynamic
+# Thus, files from everywhere could can be "static", but they must be explicitly
+# listed file extensions. Files for extensions not listed here, will not be served.
+
+# Thus you are free to put "static" content anywhere you want, including the root
+# folder, but don't forget to add extensions to the static handlers source file
+# and regenerate the yaml file that is actually included into app.yaml
+
+# The extensions are inserted into a url regex pattern that will look like this:
+# (?:^/   insures that nothing is captured if some part fails and consumes leading slash
+#   (?!api/)   insures that path does not start with one of dynamic folders
+#   (?!admin/)   --- || --- (we allow multiple top-level dynamic folder to be excluded
+#   (.+\.(html|htm))   the extension(s)
+# )
+
+# FYI: default static content expiration is set in app.yaml and is usually days long
+
+handlers:
+
+- url: (?:^/(?!api/)(.+\.(m4a|f4a|f4b|oga|ogg|flv|mp4|m4v|f4v|f4p|ogv|webm|mid|midi|mp3|wav|bmp|gif|jpeg|jpg|png|webp|svg|svgz|eot|otf|ttf|ttc|woff|crx|htc|oex|safariextz|swf|torrent|vcf|vtt|xpi|docx?|exe|pptx?|rtf|xlsx?|odp|ods|odt|bz2|gz|rar|tar|tgz|zip|txt|csv)))
+  static_files: \1
+  upload: (?:^(?!api/)(.+\.(m4a|f4a|f4b|oga|ogg|flv|mp4|m4v|f4v|f4p|ogv|webm|mid|midi|mp3|wav|bmp|gif|jpeg|jpg|png|webp|svg|svgz|eot|otf|ttf|ttc|woff|crx|htc|oex|safariextz|swf|torrent|vcf|vtt|xpi|docx?|exe|pptx?|rtf|xlsx?|odp|ods|odt|bz2|gz|rar|tar|tgz|zip|txt|csv))
+
+- url: (?:^/(?!api/)(.+\.(appcache|manifest|webapp|json|xml)))
+  static_files: \1
+  upload: (?:^(?!api/)(.+\.(appcache|manifest|webapp|json|xml))
+  expiration: "0s"
+
+- url: (?:^/(?!api/)(.+\.(html)))
+  static_files: \1
+  upload: (?:^(?!api/)(.+\.(html))
+  expiration: "15m"
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+  
+
+- url: (?:^/(?!api/)(.+\.(css|js|atom|rss)))
+  static_files: \1
+  upload: (?:^(?!api/)(.+\.(css|js|atom|rss))
+  expiration: "15m"
+
+- url: (?:^/(?!api/)(.+\.(ico)))
+  static_files: \1
+  upload: (?:^(?!api/)(.+\.(ico))
+  expiration: "7d"
+
+
+# converting /.+/ requests into /.+/index.html
+- url: (?:^/(?!api/)(.+)/)
+  static_files: \1/index.html
+  upload: (?:^(?!api/)(.+/index\.html)
+  expiration: "15m"
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+  
+
+# the rule above did not pick up / to /index.html conversion, so
+- url: /
+  static_files: index.html
+  upload: index\.html
+  expiration: "15m"
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+  

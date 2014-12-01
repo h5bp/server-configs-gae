@@ -1,0 +1,6 @@
+# !!!! AUTO-GENERATED FILE !!!!
+
+
+- url: /api/.*
+  script: api.main.application
+

@@ -56,6 +56,7 @@ skip_files:
 - ^(.*/)?.*/RCS/.*
 - ^(.*/)?\..*
 - ^(.*/)?tests$
+- ^(.*/)?build_tools$
 
 
 # Lock the versions once you start using the template
@@ -66,28 +67,6 @@ libraries:
 - name: pycrypto
   version: latest
 
-
 includes:
-- app_static_handlers.yaml
-
-
-# Entry Point
-handlers:
-
-# If you want a completely static site uncomment the following
-# lines and remove the gae.py reference from below.
-#
-# # index files
-# - url: /(.*)/
-#   static_files: static/\1/index.html
-#   upload: static/(.*)/index.html
-#   expiration: "15m"
-#
-# # site root
-# - url: /
-#   static_files: static/index.html
-#   upload: static/index.html
-#   expiration: "15m"
-
-- url: /.*
-  script: gae.application
+- app.static_handlers.yaml
+- app.dynamic_handlers.yaml
