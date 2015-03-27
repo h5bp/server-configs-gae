@@ -15,9 +15,9 @@ handlers:
 
 # Manifest files
 
-- url: /(.+\.(appcache|manifest))
+- url: /(.+\.(appcache))
   static_files: \1
-  upload: static/(.+\.(appcache|manifest))
+  upload: static/(.+\.(appcache))
   mime_type: text/cache-manifest
   expiration: "0s"
 
