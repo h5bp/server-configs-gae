@@ -37,14 +37,16 @@ as the last build step.
 Anyone and everyone is welcome to contribute, but please take a moment to review
 the [contributing guidelines](CONTRIBUTING.md).
 
+
 ## Acknowledgements
 
 Google App Engine Server Configs is only possible thanks to all the awesome
 [contributors][3]!
 
+
 ## License
 
-[MIT License](LICENSE.md)
+The code is available under the [MIT license](LICENSE.txt).
 
 
 [1]: https://developers.google.com/cloud/sdk/#Quick_Start
