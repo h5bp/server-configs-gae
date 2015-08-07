@@ -5,7 +5,7 @@
 api_version: 1
 threadsafe: yes
 
-runtime: php
+runtime: php55
 application: replace-with-your-project-id
 version: 1
 
