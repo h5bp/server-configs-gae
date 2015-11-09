@@ -69,3 +69,23 @@ handlers:
   http_headers:
     X-UA-Compatible: "IE=edge"
     #Content-Security-Policy: "script-src 'self'; object-src 'self'"
+
+# Error Handling
+# This only handles 3 specific errors, not more generic ones like 404 or 500 errors.
+
+error_handlers:
+
+# Served if any of the 3 error codes below are hit and a file is not specified.
+- file: default_error.html
+
+# Served if the app has exceeded a resource quota
+- error_code: over_quota
+  file: over_quota.html
+
+# Served if the client is blocked by your app's DoS Protection configuration
+- error_code: dos_api_denial
+  file: dos_api_denial.html
+
+# Served if a deadline is reached before there is a response from your app
+- error_code: timeout
+  file: timeout.html
